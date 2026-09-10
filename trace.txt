@@ -1,0 +1,266 @@
+
+
+                           FICHIER CREATION.SQL
+
+DROP SCHEMA
+CREATE SCHEMA
+SET
+psql:creation.sql:5: NOTICE:  table "situation" does not exist, skipping
+DROP TABLE
+psql:creation.sql:6: NOTICE:  table "etudiant" does not exist, skipping
+DROP TABLE
+psql:creation.sql:7: NOTICE:  table "accord" does not exist, skipping
+DROP TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+INSERT 0 15
+INSERT 0 15
+INSERT 0 15
+
+=====> Voici le contenu de la table ETUDIANT
+***************************************************************************
+***************************************************************************
+
+id_etudiant |  numetu  |   numine   | civiliteetu | prenometu |  nometu  |        emailetu         |   ddnetu   | departementetu |     diplome      | anneediplome | telephoneetu |        adresseetu         
+-------------+----------+------------+-------------+-----------+----------+-------------------------+------------+----------------+------------------+--------------+--------------+---------------------------
+           1 | E2021001 | INE123456A | Monsieur    | Lucas     | Durand   | lucas.durand@mail.fr    | 2001-05-12 | Informatique   | BUT informatique |         2023 | 0612345678   | 12 rue de Lille
+           2 | E2021002 | INE654321B | Madame      | Emma      | Martin   | emma.martin@mail.fr     | 2000-09-03 | Gestion        | BUT GEA          |         2022 | 0698765432   | 8 avenue de Lens
+           3 | E2021003 | INE789456C | Monsieur    | Hugo      | Lefevre  | hugo.lefevre@mail.fr    | 1999-11-20 | Multimédia     | BUT MMI          |         2021 | 0601020304   | 5 boulevard Jean Jaurès
+           4 | E2021004 | INE321654D | Madame      | Chloé     | Moreau   | chloe.moreau@mail.fr    | 2002-02-14 | Commerce       | BUT TC           |         2023 | 0611223344   | 10 rue de Paris
+           5 | E2021005 | INE987654E | Monsieur    | Nathan    | Petit    | nathan.petit@mail.fr    | 2001-07-22 | Santé          | DUT santé        |         2022 | 0655667788   | 15 avenue Victor Hugo
+           6 | E2021006 | INE456123F | Monsieur    | Leo       | Roux     | leo.roux@mail.fr        | 2000-12-01 | Informatique   | BUT informatique |         2:
+
+=====> Voici le contenu de la table SITUATION
+***************************************************************************
+***************************************************************************
+
+
+id_situation | id_etudiant | type_situation |       poste       |     entreprise      |     diplomeprepare      |  date_maj  
+--------------+-------------+----------------+-------------------+---------------------+-------------------------+------------
+            1 |           1 | Employé        | Développeur Java  | Capgemini           |                         | 2026-01-07
+            2 |           5 | Employé        | Infirmier         | Hôpital Saint-Louis |                         | 2026-01-07
+            3 |           6 | Employé        | Développeur Web   | Atos                |                         | 2026-01-07
+            4 |          10 | Employé        | Assistant médical | Clinique de Lille   |                         | 2026-01-07
+            5 |          11 | Employé        | Développeur Java  | Sopra Steria        |                         | 2026-01-07
+            6 |          15 | Employé        | Aide-soignante    | Centre Hospitalier  |                         | 2026-01-07
+            7 |           2 | En étude       |                   |                     | Master                  | 2026-01-07
+            8 |           4 | En étude       |                   |                     | Licence professionnelle | 2026-01-07
+            9 |           7 | En étude       |                   |                     | Master                  | 2026-01-07
+           10 |           9 | En étude       |                   |              :
+
+=====> Voici le contenu de la table ACCORD
+***************************************************************************
+ id_accord | id_etudiant | accord_vacataire | accord_stage | accord_ceremonie 
+-----------+-------------+------------------+--------------+------------------
+         1 |           1 | t                | t            | f
+         2 |           2 | f                | t            | t
+         3 |           3 | f                | f            | f
+         4 |           4 | f                | t            | t
+         5 |           5 | t                | t            | f
+         6 |           6 | t                | f            | f
+         7 |           7 | f                | t            | t
+         8 |           8 | f                | f            | f
+         9 |           9 | t                | t            | t
+        10 |          10 | t                | f            | t
+        11 |          11 | t                | t            | f
+        12 |          12 | f                | t            | t
+        13 |          13 | f                | f            | f
+        14 |          14 | f                | t            | t
+        15 |          15 | t                | t            | t
+(15 rows)
+
+
+                             FICHIER fonctions.sql
+postgres=# \i fonctions.sql
+SET
+DROP TRIGGER
+DROP TRIGGER
+DROP TRIGGER
+DROP TRIGGER
+DROP TRIGGER
+DROP TRIGGER
+DROP TRIGGER
+DROP TRIGGER
+***************************************************************************
+=====> Compter le nombre d’étudiants diplômés par année
+==> Utilité : statistiques annuelles de l établissement
+***************************************************************************
+CREATE FUNCTION
+==> Test de nb_diplomes_par_annee : 
+ nb_diplomes_par_annee 
+-----------------------
+                     7
+(1 row)
+
+***************************************************************************
+=====> Afficher la situation d un étudiant
+==> Utilité : affichage rapide de la situation
+***************************************************************************
+CREATE FUNCTION
+==> Test de situation_etudiant : 
+           situation_etudiant           
+----------------------------------------
+ Employé - Développeur Java - Capgemini
+(1 row)
+
+***************************************************************************
+=====> Vérifier si un étudiant est contactable par l’IUT
+==> Utilité : respect du RGPD, logique métier claire
+***************************************************************************
+CREATE FUNCTION
+==> Test de etudiant_contactable : 
+ etudiant_contactable 
+----------------------
+ f
+(1 row)
+
+***************************************************************************
+=====> Vérifier si un étudiant existe déjà
+==> Utilité : éviter les doublons d’étudiants et les erreurs de saisis
+***************************************************************************
+CREATE FUNCTION
+==> Test de etudiant_existe : 
+ etudiant_existe 
+-----------------
+ t
+(1 row)
+
+***************************************************************************
+=====> Retourne l’âge d’un étudiant diplômé
+==> Utilité : études démographiques, très courant en base universitaire
+***************************************************************************
+CREATE FUNCTION
+==> Test de age_etudiant : 
+ age_etudiant 
+--------------
+           24
+(1 row)
+
+***************************************************************************
+=====> Nombre d’étudiants par type de situation
+==> Utilité : savoir combien sont en emploi / études ou sans emploi pour le taux d insertion pro
+***************************************************************************
+CREATE FUNCTION
+==> Test de nb_etudiants_par_situation : 
+ nb_etudiants_par_situation 
+----------------------------
+                          6
+(1 row)
+
+***************************************************************************
+=====> Affiche le taux d insertion pro par département après obtention du diplôme
+==> Utilité : Suivi de l’insertion professionnelle des diplômés
+***************************************************************************
+CREATE FUNCTION
+==> Test de taux_insertion_par_departement : 
+ departement  | taux_insertion 
+--------------+----------------
+ Commerce     |           0.00
+ Gestion      |           0.00
+ Informatique |          75.00
+ Multimédia   |           0.00
+ Santé        |         100.00
+(5 rows)
+
+***************************************************************************
+=====> mise à jour automatique de la date
+==> Utilité : À chaque modification de la situation, la date est mise à jour automatiquement.
+***************************************************************************
+CREATE FUNCTION
+CREATE TRIGGER
+==> Test de maj_date_situation : 
+UPDATE 1
+***************************************************************************
+=====> Empêcher une année de diplôme dans le futur
+==> Utilité : évite les incohérences dans la DB.
+***************************************************************************
+CREATE FUNCTION
+CREATE TRIGGER
+==> Test de verif_annee_diplome (doit produire une erreur) : 
+psql:fonctions.sql:229: ERROR:  Année de diplôme invalide
+CONTEXT:  PL/pgSQL function verif_annee_diplome() line 4 at RAISE
+***************************************************************************
+=====> Empêcher une situation vide en plus du NOT NULL dans la table
+==> Utilité : Préciser que la situation doit être renseignée (Elle renforce la contrainte SQL et permet un message d’erreur plus explicite côté application Java.
+***************************************************************************
+CREATE FUNCTION
+CREATE TRIGGER
+==> Test de verif_situation (doit produire une erreur) : 
+psql:fonctions.sql:261: ERROR:  La situation doit être renseignée
+CONTEXT:  PL/pgSQL function verif_situation() line 4 at RAISE
+***************************************************************************
+=====> Vérifier le format de l’email
+==> Utilité : évite les emails invalides.
+***************************************************************************
+CREATE FUNCTION
+CREATE TRIGGER
+==> Test de verifier_email (doit produire une erreur) : 
+psql:fonctions.sql:294: ERROR:  Adresse email invalide
+CONTEXT:  PL/pgSQL function verifier_email() line 4 at RAISE
+***************************************************************************
+=====> Création automatique d’une situation lors de l’ajout d’un étudiant
+==> Utilité : Aucun étudiant sans situation -> par défaut : Sans emploi .
+***************************************************************************
+CREATE FUNCTION
+CREATE TRIGGER
+==> Test de creer_situation_par_defaut : 
+DELETE 1
+INSERT 0 1
+ type_situation 
+----------------
+ Sans emploi
+(1 row)
+
+***************************************************************************
+=====> Nettoyage/ajout automatique des champs selon la situation
+==> Utilité : Si l’étudiant est Sans emploi, alors : poste = NULL entreprise = NULL diplomePrepare = NULL
+***************************************************************************
+CREATE FUNCTION
+CREATE TRIGGER
+==> Test de nettoyer_situation : 
+UPDATE 1
+=====> Employé | Développeur Java | Capgemini | Master
+ type_situation |      poste       | entreprise | diplomeprepare 
+----------------+------------------+------------+----------------
+ Employé        | Développeur Java | Capgemini  | Master
+(1 row)
+
+Maintenant testons si en passant cet enregistrement en sans emploi, tout est null :
+UPDATE 1
+ type_situation | poste | entreprise | diplomeprepare 
+----------------+-------+------------+----------------
+ Sans emploi    |       |            | 
+(1 row)
+
+***************************************************************************
+=====> Quand un étudiant est supprimé → sa situation et ses accords sont supprimés
+==> Utilité : Évite toute incohérence dans le projet
+***************************************************************************
+CREATE FUNCTION
+CREATE TRIGGER
+==> Test de supprimer_donnees_associees : 
+DELETE 0
+ id_accord | id_etudiant | accord_vacataire | accord_stage | accord_ceremonie 
+-----------+-------------+------------------+--------------+------------------
+(0 rows)
+
+***************************************************************************
+=====> Contraintes métier selon le type de situation
+==> Utilité : garantir la cohérence des informations selon la situation
+***************************************************************************
+CREATE FUNCTION
+CREATE TRIGGER
+==> Test invalide : Employé sans poste (doit échouer)
+psql:fonctions.sql:477: ERROR:  Pour une situation "Employé", le poste et l entreprise doivent être renseignés
+CONTEXT:  PL/pgSQL function verif_coherence_situation() line 6 at RAISE
+==> Test invalide : En étude sans diplôme (doit échouer)
+psql:fonctions.sql:484: ERROR:  Pour une situation "En étude", le diplôme préparé doit être renseigné
+CONTEXT:  PL/pgSQL function verif_coherence_situation() line 14 at RAISE
+==> Test valide : Employé avec toutes les informations
+UPDATE 1
+ type_situation |      poste       | entreprise 
+----------------+------------------+------------
+ Employé        | Développeur Java | Capgemini
+(1 row)
+
