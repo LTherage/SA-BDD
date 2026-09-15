@@ -246,12 +246,6 @@ This repository does not currently include a dedicated `LICENSE` file. The proje
 
 </div>
 
-<div align="right">
-
-[![][back-to-top]](#top)
-
-</div>
-
 
 [back-to-top]: https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square
 
